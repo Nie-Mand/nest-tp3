@@ -5,6 +5,7 @@ import {
   Column,
   ManyToMany,
   OneToMany,
+  JoinTable,
 } from 'typeorm'
 import { User } from './user.model'
 import { Skill } from './skill.model'
@@ -29,9 +30,14 @@ export class Cv extends CoreEntity {
   @Column()
   path: string
 
-  @ManyToMany(() => Skill, skill => skill.resumes)
+  @ManyToMany(() => Skill, skill => skill.resumes, {
+    eager: true,
+  })
+  @JoinTable()
   skills: Skill[]
 
-  @OneToMany(() => User, user => user.resumes)
+  @OneToMany(() => User, user => user.resumes, {
+    eager: true,
+  })
   user: User
 }

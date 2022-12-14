@@ -1,5 +1,11 @@
 import { CoreEntity } from './core.model'
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm'
 import { Cv } from './cv.model'
 
 @Entity('skill')
@@ -14,5 +20,6 @@ export class Skill extends CoreEntity {
   label: string
 
   @ManyToMany(() => Cv, cv => cv.skills)
+  @JoinTable()
   resumes: Cv[]
 }
