@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { randWord } from '@ngneat/falso'
+import { randUserName, randEmail, randPassword } from '@ngneat/falso'
 import { Repository } from 'typeorm'
 import { User } from '../../models/user.model'
 
@@ -12,12 +12,15 @@ export class UsersService {
   ) {}
 
   async seed() {
-    // const skills = new Array(10).fill(null).map(() => ({
-    //   label: randWord(),
-    // }))
-    // for (const skill of skills) {
-    //   await this.skills.save(skill)
-    // }
-    // console.log('done')
+    for (let i = 0; i < 10; i++) {
+      const user = this.users.create({
+        username: randUserName(),
+        email: randEmail(),
+        password: randPassword(),
+      })
+      await user.hashPassword()
+      await this.users.save(user)
+    }
+    console.log('done')
   }
 }
