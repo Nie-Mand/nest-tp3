@@ -26,7 +26,7 @@ import { Cv } from './models/cv.model'
       database: process.env.DATABASE_NAME,
       ssl: JSON.parse(process.env.DATABASE_SSL),
       entities: [User, Skill, Cv],
-      synchronize: true,
+      synchronize: false,
     }),
     TypeOrmModule.forFeature([User, Skill, Cv]),
   ],

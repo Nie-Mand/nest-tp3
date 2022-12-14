@@ -7,7 +7,10 @@ export class Skill extends CoreEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({
+    nullable: true,
+    unique: true,
+  })
   label: string
 
   @ManyToMany(() => Cv, cv => cv.skills)
